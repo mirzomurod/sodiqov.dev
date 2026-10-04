@@ -1,0 +1,244 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const services = [
+  {
+    icon: '🤖', title: 'Telegram-боты', desc: 'Магазины, рассылки, автоматизация, приём заявок.', price: 'от 800 сомони',
+    full: 'Разрабатываю Telegram-ботов под любые задачи: магазины, служба поддержки, рассылки, автоматизация бизнес-процессов, приём заявок и интеграции с внешними сервисами.',
+    includes: ['Каталог товаров и корзина', 'Онлайн-оплата', 'Админ-панель', 'Интеграция с CRM/Google Sheets', 'Уведомления в чат менеджера'],
+    terms: 'от 3 до 10 дней'
+  },
+  {
+    icon: '💻', title: 'Сайты для компаний', desc: 'Визитки, лендинги, корпоративные сайты.', price: 'от 1500 сомони',
+    full: 'Создаю современные адаптивные сайты для компаний и частных специалистов: лендинги, визитки, корпоративные сайты с формой заявок и уведомлениями.',
+    includes: ['Дизайн под ваш бренд', 'Адаптив под все устройства', 'Форма заявок с уведомлениями в Telegram', 'SEO-оптимизация', 'Домен и SSL'],
+    terms: 'от 3 до 7 дней'
+  },
+  {
+    icon: '🛒', title: 'Интернет-магазины', desc: 'Каталог товаров, корзина, онлайн-оплата.', price: 'от 3000 сомони',
+    full: 'Интернет-магазины под ключ: каталог, корзина, оформление заказов, онлайн-оплата, личный кабинет покупателя и удобная админ-панель для управления товарами.',
+    includes: ['Каталог с фильтрами', 'Корзина и оформление заказа', 'Онлайн-оплата (карты, электронные кошельки)', 'Админ-панель', 'Интеграция с Telegram'],
+    terms: 'от 7 до 14 дней'
+  },
+  {
+    icon: '📱', title: 'Мобильные приложения', desc: 'Android и iOS, кроссплатформенные приложения.', price: 'от 5000 сомони',
+    full: 'Разработка мобильных приложений для Android и iOS. Кроссплатформенные решения — одна кодовая база, работает на обеих платформах.',
+    includes: ['Кроссплатформенная разработка', 'Публикация в Google Play / App Store', 'Push-уведомления', 'Интеграция с сервером', 'Поддержка после релиза'],
+    terms: 'от 14 до 30 дней'
+  },
+  {
+    icon: '🛠️', title: 'Доработки и багфикс', desc: 'Правки в существующих проектах, ускорение.', price: 'от 200 сомони',
+    full: 'Дорабатываю существующие проекты: добавление новых функций, исправление ошибок, оптимизация скорости, рефакторинг кода, миграция на новые версии.',
+    includes: ['Правки кода', 'Исправление багов', 'Оптимизация скорости', 'Добавление функций', 'Консультации по проекту'],
+    terms: 'от 1 до 5 дней'
+  },
+  {
+    icon: '⚙️', title: 'Автоматизация бизнеса', desc: 'Скрипты, парсеры, интеграции сервисов.', price: 'от 500 сомони',
+    full: 'Автоматизирую рутинные процессы: парсинг данных, интеграции между сервисами, скрипты для рутинных операций, Telegram-уведомления о событиях.',
+    includes: ['Парсеры сайтов и данных', 'Интеграции API', 'Telegram-уведомления', 'Автоматические отчёты', 'Скрипты по расписанию'],
+    terms: 'от 2 до 7 дней'
+  }
+];
+
+const projects = [
+  {
+    title: 'Telegram-бот для магазина', tag: 'Telegram Bot',
+    short: 'Каталог, корзина, заказы в чат менеджеру.',
+    full: 'Полноценный Telegram-бот для интернет-магазина: каталог товаров с фото и описанием, корзина, оформление заказа, интеграция с оплатой и пересылка заказов менеджеру в чат.',
+    stack: ['Python', 'aiogram', 'PostgreSQL', 'Telegram API'], price: 'от 2000 сомони'
+  },
+  {
+    title: 'Сайт-визитка для компании', tag: 'Web',
+    short: 'Адаптивный лендинг с формой заявок.',
+    full: 'Современный адаптивный сайт-визитка для компании: описание услуг, портфолио, форма заявки с уведомлениями в Telegram, оптимизация под мобильные.',
+    stack: ['HTML', 'CSS', 'JavaScript', 'Astro'], price: 'от 1500 сомони'
+  },
+  {
+    title: 'Бот для рассылок', tag: 'Automation',
+    short: 'Сегментированные рассылки по базе.',
+    full: 'Телеграм-бот для массовых рассылок: загрузка базы, сегментация пользователей, отложенные рассылки, статистика прочтений, экспорт результатов.',
+    stack: ['Python', 'aiogram', 'SQLite', 'Pandas'], price: 'от 1200 сомони'
+  }
+];
+---
+
+<Layout>
+  <header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#0a0a0a]/70 border-b border-[#222]">
+    <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="text-xl font-bold tracking-tight text-white">Sodiqov<span class="text-[#8b5cf6]">.dev</span></a>
+      <ul class="hidden md:flex items-center gap-8 text-sm text-[#888]">
+        <li><a href="#services" class="hover:text-white transition">Услуги</a></li>
+        <li><a href="#portfolio" class="hover:text-white transition">Портфолио</a></li>
+        <li><a href="#about" class="hover:text-white transition">О себе</a></li>
+        <li><a href="#contact" class="hover:text-white transition">Контакты</a></li>
+      </ul>
+      <a href="https://t.me/mirzomurod_2002" target="_blank" class="text-sm px-4 py-2 rounded-lg bg-[#8b5cf6] hover:bg-[#a78bfa] text-white font-medium transition">Связаться</a>
+    </nav>
+  </header>
+
+  <section class="min-h-screen flex items-center pt-24 pb-16 px-6">
+    <div class="max-w-6xl mx-auto w-full fade-up">
+      <p class="text-[#8b5cf6] font-medium mb-4 tracking-wider uppercase text-sm">Mirzomurod Sodiqov</p>
+      <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6">
+        Создаю <span class="text-[#8b5cf6]">Telegram-ботов</span>,<br />сайты и приложения
+      </h1>
+      <p class="text-lg md:text-xl text-[#888] max-w-2xl mb-10">
+        Разработчик из Таджикистана. Делаю проекты под ключ: от идеи до запуска. Быстро, качественно, с поддержкой после сдачи.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="#services" class="px-6 py-3 rounded-lg bg-[#8b5cf6] hover:bg-[#a78bfa] text-white font-medium transition">Посмотреть услуги</a>
+        <a href="#contact" class="px-6 py-3 rounded-lg border border-[#333] hover:border-[#8b5cf6] text-white font-medium transition">Обсудить проект</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="py-24 px-6 border-t border-[#1a1a1a]">
+    <div class="max-w-6xl mx-auto">
+      <div class="mb-14">
+        <p class="text-[#8b5cf6] font-medium mb-3 tracking-wider uppercase text-sm">Услуги</p>
+        <h2 class="text-4xl md:text-5xl font-bold text-white">Что я делаю</h2>
+        <p class="text-[#666] text-sm mt-3">Нажми на карточку, чтобы узнать подробнее</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.map((s, i) => (
+          <button type="button" data-service={i}
+            class="service-card text-left group p-6 rounded-2xl bg-[#111] border border-[#222] hover:border-[#8b5cf6] transition-all duration-300 hover:-translate-y-1 cursor-pointer w-full">
+            <div class="text-3xl mb-4">{s.icon}</div>
+            <h3 class="text-xl font-semibold text-white mb-2">{s.title}</h3>
+            <p class="text-[#888] text-sm mb-4 leading-relaxed">{s.desc}</p>
+            <p class="text-[#8b5cf6] font-semibold">{s.price}</p>
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio" class="py-24 px-6 border-t border-[#1a1a1a]">
+    <div class="max-w-6xl mx-auto">
+      <div class="mb-14">
+        <p class="text-[#8b5cf6] font-medium mb-3 tracking-wider uppercase text-sm">Портфолио</p>
+        <h2 class="text-4xl md:text-5xl font-bold text-white">Мои работы</h2>
+        <p class="text-[#666] text-sm mt-3">Нажми на карточку, чтобы узнать подробнее</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {projects.map((p, i) => (
+          <button type="button" data-project={i}
+            class="project-card text-left p-6 rounded-2xl bg-[#111] border border-[#222] hover:border-[#8b5cf6] hover:-translate-y-1 transition cursor-pointer w-full">
+            <span class="text-xs text-[#8b5cf6] font-medium uppercase tracking-wider">{p.tag}</span>
+            <h3 class="text-lg font-semibold text-white mt-2 mb-2">{p.title}</h3>
+            <p class="text-[#888] text-sm">{p.short}</p>
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="py-24 px-6 border-t border-[#1a1a1a]">
+    <div class="max-w-4xl mx-auto">
+      <p class="text-[#8b5cf6] font-medium mb-3 tracking-wider uppercase text-sm">О себе</p>
+      <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">Привет, я Мирзомурод 👋</h2>
+      <div class="space-y-4 text-[#bbb] text-lg leading-relaxed">
+        <p>Разработчик из Таджикистана. Специализируюсь на Telegram-ботах, сайтах, интернет-магазинах и мобильных приложениях.</p>
+        <p>Работаю с русскоязычными и таджикскими клиентами. Отвечаю быстро, соблюдаю сроки, помогаю после сдачи проекта.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="py-24 px-6 border-t border-[#1a1a1a]">
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="text-[#8b5cf6] font-medium mb-3 tracking-wider uppercase text-sm">Контакты</p>
+      <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Обсудим твой проект</h2>
+      <p class="text-[#888] text-lg mb-10 max-w-xl mx-auto">Напиши мне в Telegram — отвечу быстро.</p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="https://t.me/mirzomurod_2002" target="_blank" class="px-8 py-4 rounded-lg bg-[#8b5cf6] hover:bg-[#a78bfa] text-white font-semibold transition">Telegram: @mirzomurod_2002</a>
+        <a href="mailto:mirzomurod_2002@mail.ru" class="px-8 py-4 rounded-lg border border-[#333] hover:border-[#8b5cf6] text-white font-semibold transition">mirzomurod_2002@mail.ru</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-10 px-6 border-t border-[#1a1a1a]">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-[#666]">
+      <p>© 2025 Sodiqov.dev — Mirzomurod Sodiqov</p>
+      <p>Сделано в Таджикистане</p>
+    </div>
+  </footer>
+
+  <div id="modal" class="hidden fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm items-center justify-center p-4">
+    <div class="relative max-w-2xl w-full bg-[#111] border border-[#333] rounded-2xl p-8 md:p-10 max-h-[90vh] overflow-y-auto">
+      <button id="modal-close" type="button" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-[#1a1a1a] hover:bg-[#8b5cf6] text-white text-xl transition">×</button>
+      <span id="modal-tag" class="text-xs text-[#8b5cf6] font-medium uppercase tracking-wider"></span>
+      <h3 id="modal-title" class="text-2xl md:text-3xl font-bold text-white mt-2 mb-4"></h3>
+      <p id="modal-full" class="text-[#bbb] leading-relaxed mb-6"></p>
+      <div id="modal-includes-block">
+        <p class="text-[#8b5cf6] font-medium mb-2 text-sm uppercase tracking-wider">Что входит</p>
+        <ul id="modal-includes" class="text-[#bbb] mb-6 space-y-2"></ul>
+      </div>
+      <div id="modal-stack-block">
+        <p class="text-[#8b5cf6] font-medium mb-2 text-sm uppercase tracking-wider">Технологии</p>
+        <div id="modal-stack" class="flex flex-wrap gap-2 mb-6"></div>
+      </div>
+      <p id="modal-terms" class="text-[#888] text-sm mb-4"></p>
+      <p class="text-[#8b5cf6] font-semibold text-lg mb-6" id="modal-price"></p>
+      <a href="https://t.me/mirzomurod_2002" target="_blank" class="inline-block px-6 py-3 rounded-lg bg-[#8b5cf6] hover:bg-[#a78bfa] text-white font-medium transition">Обсудить в Telegram</a>
+    </div>
+  </div>
+
+  <script define:vars={{ services, projects }}>
+    const modal = document.getElementById('modal');
+    const modalTag = document.getElementById('modal-tag');
+    const modalTitle = document.getElementById('modal-title');
+    const modalFull = document.getElementById('modal-full');
+    const modalIncludes = document.getElementById('modal-includes');
+    const modalIncludesBlock = document.getElementById('modal-includes-block');
+    const modalStack = document.getElementById('modal-stack');
+    const modalStackBlock = document.getElementById('modal-stack-block');
+    const modalTerms = document.getElementById('modal-terms');
+    const modalPrice = document.getElementById('modal-price');
+    const closeBtn = document.getElementById('modal-close');
+
+    function openModal(type, data) {
+      modalIncludesBlock.style.display = 'none';
+      modalStackBlock.style.display = 'none';
+      modalTerms.textContent = '';
+      modalTag.textContent = '';
+      modalIncludes.innerHTML = '';
+      modalStack.innerHTML = '';
+
+      if (type === 'service') {
+        modalTag.textContent = 'Услуга';
+        modalTitle.textContent = data.title;
+        modalFull.textContent = data.full;
+        modalIncludesBlock.style.display = 'block';
+        modalIncludes.innerHTML = data.includes.map((it) => `<li class="flex items-start gap-2"><span class="text-[#8b5cf6]">✓</span><span>${it}</span></li>`).join('');
+        modalTerms.textContent = `Сроки: ${data.terms}`;
+      } else {
+        modalTag.textContent = data.tag;
+        modalTitle.textContent = data.title;
+        modalFull.textContent = data.full;
+        modalStackBlock.style.display = 'block';
+        modalStack.innerHTML = data.stack.map((t) => `<span class="px-3 py-1 rounded-lg bg-[#1a1a1a] border border-[#333] text-[#bbb] text-sm">${t}</span>`).join('');
+      }
+
+      modalPrice.textContent = data.price;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeModal() {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    document.querySelectorAll('.service-card').forEach((card) => {
+      card.addEventListener('click', () => openModal('service', services[parseInt(card.dataset.service)]));
+    });
+
+    document.querySelectorAll('.project-card').forEach((card) => {
+      card.addEventListener('click', () => openModal('project', projects[parseInt(card.dataset.project)]));
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+  </script>
+</Layout>
